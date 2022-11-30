@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RequestController!{% endblock %}
+
+{% block body %}
+
+<table style="border: 1px solid">
+    <caption>Заявки:</caption>
+    <tr>
+        <th>дата создания</th>
+        <th>статус</th>
+        <th>заголовок</th>
+   </tr>
+    {% for request in requests %}
+        <tr
+        {% if request.getStatus == 'новая' and date().format('U') > request.getCreateDate.format('U') + 3600 %} {{ "style='background-color: red;'" }} {% endif %}
+        >
+            <td>
+                {{ request.getCreateDate.format('Y-m-d:H-i-s') }}
+            </td>
+            <td>
+                {{ request.getStatus }}
+            </td>
+            <td>
+                {{ request.getHead }}
+            </td>
+            <td><a href="/check?id={{ request.getId }}">Просмотреть</a></td>
+        </tr>
+    {% endfor %}
+   
+</table>
+
+{% endblock %}

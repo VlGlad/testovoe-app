@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RequestController!{% endblock %}
+
+{% block body %}
+
+<table style="border: 1px solid">
+    <caption>Заявка:</caption>
+    <tr> 
+        <td>Дата создания</td>
+        <td>{{ request.getCreateDate.format('Y-m-d:H-i-s') }}</td>
+    </tr>
+    <tr> 
+        <td>Заголовок</td>
+        <td>{{ request.getHead }}</td>
+    </tr>
+    <tr> 
+        <td>Текст</td>
+        <td>{{ request.getText }}</td>
+    </tr>
+    <tr> 
+        <td>Текущий статус</td>
+        <td>{{ request.getStatus }}</td>
+    </tr>
+</table>
+
+<div>
+{{ form_start(form) }}
+<p>Назначить новый статус заявке:</p>
+{{ form_label(form.status, 'Статус:') }}
+{{ form_widget(form.status, {'attr': {'class': 'select_field'}}) }}
+{{ form_end(form) }}
+</div>
+
+
+
+{% endblock %}
